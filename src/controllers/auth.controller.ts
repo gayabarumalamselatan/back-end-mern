@@ -64,7 +64,15 @@ export default {
 
   },
 
+  // Fungsi Login
   async login(req: Request, res: Response){
+
+   /**
+    #swagger.requestBody = {
+      required: true,
+      schema: {$ref: "#/components/schemas/LoginRequest"}
+    }
+    */
 
     const {
       identifier, 
@@ -119,7 +127,15 @@ export default {
     }
   },
 
+  // Fungsi auth.me
   async me(req: IreqUser, res: Response){
+
+    /**
+     #swagger.security = [{
+      "bearerAuth": []
+     }]
+     */
+
     try {
       const user = req.user;
       const result = await UserModel.findById(user?.id);

@@ -10,4 +10,4 @@ router.post('/auth/login', authController.login);
 
 router.get('/auth/me', authMiddleware, authController.me);
 
-export default router
+export default router;
