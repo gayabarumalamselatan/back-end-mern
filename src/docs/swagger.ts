@@ -25,8 +25,18 @@ const doc = {
     },
     schemas: {
       LoginRequest: {
-        identifier: "test@email.com",
-        password: "test",
+        identifier: "yoho2025@yopmail.com",
+        password: "Member2025!",
+      }, 
+      RegisterRequest: {
+        fullName: "yoho2025",
+        userName: "yoho2025",
+        email: "yoho2025@yopmail.com",
+        password: "Member2025!",
+        confirmPassword: "Member2025!",
+      },
+      ActivationRequest: {
+        code: "abcdef",
       }
     }
   },
