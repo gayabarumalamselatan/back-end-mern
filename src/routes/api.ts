@@ -9,6 +9,7 @@ import categoryController from "../controllers/category.controller";
 import regionController from "../controllers/region.controller";
 import eventController from "../controllers/event.controller";
 import ticketController from "../controllers/ticket.controller";
+import bannerController from "../controllers/banner.controller";
 
 const router = express.Router();
 
@@ -287,7 +288,7 @@ router.get(
     #swagger.tags = ['Events']
   */
 );
-// SAMPE SINI 16:05
+
 router.post(
   "/tickets",
   [authMiddleware, aclMiddleware([ROLES.ADMIN])],
@@ -306,5 +307,24 @@ router.delete(
   ticketController.remove,
 );
 router.get("/tickets/:eventId/events", ticketController.findAllByEvent);
+
+// Banner
+router.post(
+  "/banners",
+  [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+  bannerController.create,
+);
+router.get("/banners", bannerController.findAll);
+router.get("/banners/:id", bannerController.findOne);
+router.put(
+  "/banners/:id",
+  [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+  bannerController.update,
+);
+router.delete(
+  "/banners/:id",
+  [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+  bannerController.remove,
+);
 
 export default router;
