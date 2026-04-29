@@ -58,6 +58,9 @@ export default {
   async findOne(req: IreqUser, res: Response) {
     try {
       const { id } = req.params;
+      if (!isValidObjectId(id)) {
+        return response.notFound(res, "failed to find one ticket");
+      }
       const result = await TicektModel.findById(id);
       if (!result) {
         return response.notFound(res, "failed to find one ticket");
@@ -70,23 +73,29 @@ export default {
   async update(req: IreqUser, res: Response) {
     try {
       const { id } = req.params;
+      if (!isValidObjectId(id)) {
+        return response.notFound(res, "failed to update one ticket");
+      }
       const result = await TicektModel.findByIdAndUpdate(id, req.body, {
         new: true,
       });
       response.success(res, result, "success update one ticket");
     } catch (error) {
-      response.error(res, error, "failed to update a ticket");
+      response.error(res, error, "failed to update one ticket");
     }
   },
   async remove(req: IreqUser, res: Response) {
     try {
       const { id } = req.params;
+      if (!isValidObjectId(id)) {
+        return response.notFound(res, "failed to remove one ticket");
+      }
       const result = await TicektModel.findByIdAndDelete(id, {
         new: true,
       });
       response.success(res, result, "success remove one ticket");
     } catch (error) {
-      response.error(res, error, "failed to remove a ticket");
+      response.error(res, error, "failed to remove one ticket");
     }
   },
   async findAllByEvent(req: IreqUser, res: Response) {

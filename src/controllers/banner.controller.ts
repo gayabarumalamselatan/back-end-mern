@@ -2,7 +2,7 @@ import { Response } from "express";
 import { IpaginationQuery, IreqUser } from "../utils/interface";
 import response from "../utils/response";
 import BannerModel, { bannerDAO, TypeBanner } from "../models/banner.model";
-import { FilterQuery } from "mongoose";
+import { FilterQuery, isValidObjectId } from "mongoose";
 
 export default {
   async create(req: IreqUser, res: Response) {
@@ -57,6 +57,9 @@ export default {
   async findOne(req: IreqUser, res: Response) {
     try {
       const { id } = req.params;
+      if (!isValidObjectId(id)) {
+        return response.notFound(res, "failed to find one banner");
+      }
       const result = await BannerModel.findById(id);
       if (!result) {
         return response.notFound(res, "failed to find one banner");
@@ -69,10 +72,13 @@ export default {
   async update(req: IreqUser, res: Response) {
     try {
       const { id } = req.params;
+      if (!isValidObjectId(id)) {
+        return response.notFound(res, "failed to upadate one banner");
+      }
       const result = await BannerModel.findByIdAndUpdate(id, req.body, {
         new: true,
       });
-      response.success(res, result, "success update one banner");
+      response.success(res, result, "success to update one banner");
     } catch (error) {
       response.error(res, error, "failed to update one banner");
     }
@@ -80,10 +86,13 @@ export default {
   async remove(req: IreqUser, res: Response) {
     try {
       const { id } = req.params;
+      if (!isValidObjectId(id)) {
+        return response.notFound(res, "failed to remove one banner");
+      }
       const result = await BannerModel.findByIdAndDelete(id, {
         new: true,
       });
-      response.success(res, result, "success remove one banner");
+      response.success(res, result, "success to remove one banner");
     } catch (error) {
       response.error(res, error, "failed to remove one banner");
     }

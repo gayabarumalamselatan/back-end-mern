@@ -2,7 +2,7 @@ import { Response } from "express";
 import { IpaginationQuery, IreqUser } from "../utils/interface";
 import response from "../utils/response";
 import eventModel, { eventDAO, TEvent } from "../models/event.model";
-import { FilterQuery } from "mongoose";
+import { FilterQuery, isValidObjectId } from "mongoose";
 
 export default {
   async create(req: IreqUser, res: Response) {
@@ -55,11 +55,14 @@ export default {
   async findOne(req: IreqUser, res: Response) {
     try {
       const { id } = req.params;
+      if (!isValidObjectId(id)) {
+        return response.notFound(res, "failed to find one event");
+      }
       const result = await eventModel.findById(id);
       if (!result) {
-        return response.notFound(res, "failed find one event");
+        return response.notFound(res, "failed to find one event");
       }
-      response.success(res, result, "Success find one event");
+      response.success(res, result, "Success to find one event");
     } catch (error) {
       response.error(res, error, "failed to find one event");
     }
@@ -67,21 +70,27 @@ export default {
   async update(req: IreqUser, res: Response) {
     try {
       const { id } = req.params;
+      if (!isValidObjectId(id)) {
+        return response.notFound(res, "failed to update one event");
+      }
       const result = await eventModel.findByIdAndUpdate(id, req.body, {
         new: true,
       });
-      response.success(res, result, "Success update an event");
+      response.success(res, result, "success to update one event");
     } catch (error) {
-      response.error(res, error, "failed to update an event");
+      response.error(res, error, "failed to update one event");
     }
   },
   async remove(req: IreqUser, res: Response) {
     try {
       const { id } = req.params;
+      if (!isValidObjectId(id)) {
+        return response.notFound(res, "failed to delete one event");
+      }
       const result = await eventModel.findByIdAndDelete(id, { new: true });
-      response.success(res, result, "Success delete an event");
+      response.success(res, result, "success to delete one event");
     } catch (error) {
-      response.error(res, error, "failed to delete an event");
+      response.error(res, error, "failed to delete one event");
     }
   },
   async findOneBySlug(req: IreqUser, res: Response) {
