@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api",
+      "url": "http://localhost:3001/api",
       "description": "Local Server"
     },
     {
@@ -447,7 +447,7 @@
         }
       }
     },
-    "/region-search": {
+    "/regions-search": {
       "get": {
         "tags": [
           "Regions"
@@ -663,11 +663,11 @@
         "properties": {
           "identifier": {
             "type": "string",
-            "example": "yoho2025@yopmail.com"
+            "example": "soerjahartono22@gmail.com"
           },
           "password": {
             "type": "string",
-            "example": "Member2025!"
+            "example": "Panasginienaknyaminumapa?1"
           }
         },
         "xml": {
@@ -777,6 +777,10 @@
                 "items": {
                   "type": "number"
                 }
+              },
+              "address": {
+                "type": "string",
+                "example": ""
               }
             }
           },
@@ -785,6 +789,10 @@
             "example": false
           },
           "isFeature": {
+            "type": "boolean",
+            "example": false
+          },
+          "isPublish": {
             "type": "boolean",
             "example": false
           }

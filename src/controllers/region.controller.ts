@@ -7,6 +7,7 @@ export default {
     try {
       const { name } = req.query;
       const result = await RegionModel.findByCity(`${name}`);
+      console.log(result)
       response.success(res, result, "success get region by city name");
     } catch (error) {
       response.error(res, error, "failed to get region by city name");

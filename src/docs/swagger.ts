@@ -6,28 +6,28 @@ const doc = {
     title: "Dokumentasi API Acara",
     description: "Dokumentasi API Acara",
   },
-  servers:[
+  servers: [
     {
-      url: "http://localhost:3000/api",
-      description: "Local Server"
+      url: "http://localhost:3001/api",
+      description: "Local Server",
     },
     {
       url: "https://back-end-mern-chi.vercel.app/api",
       description: "Deploy Server",
-    }
+    },
   ],
-  components:{
+  components: {
     securitySchemes: {
       bearerAuth: {
         type: "http",
         scheme: "bearer",
-      }
+      },
     },
     schemas: {
       LoginRequest: {
-        identifier: "yoho2025@yopmail.com",
-        password: "Member2025!",
-      }, 
+        identifier: "soerjahartono22@gmail.com",
+        password: "Panasginienaknyaminumapa?1",
+      },
       RegisterRequest: {
         fullName: "yoho2025",
         userName: "yoho2025",
@@ -41,30 +41,32 @@ const doc = {
       CreateCategoryRequest: {
         name: "",
         description: "",
-        icon: ""
+        icon: "",
       },
       CreateEventRequest: {
-        "name": "",
-        "banner": "fileUrl",
-        "category": "category ObjectID",
-        "description": "",
-        "startDate": "yyyy-mm-dd hh:mm:ss",
-        "endDate": "yyyy-mm-dd hh:mm:ss",
-        "location": {
-            "region": "region id",
-            "coordinates": [0, 0]
+        name: "",
+        banner: "fileUrl",
+        category: "category ObjectID",
+        description: "",
+        startDate: "yyyy-mm-dd hh:mm:ss",
+        endDate: "yyyy-mm-dd hh:mm:ss",
+        location: {
+          region: "region id",
+          coordinates: [0, 0],
+          address: "",
         },
-        "isOnline": false,
-        "isFeature": false
+        isOnline: false,
+        isFeature: false,
+        isPublish: false,
       },
       RemoveMediaRequest: {
-        fileUrl: ""
-      }
-    }
+        fileUrl: "",
+      },
+    },
   },
 };
 
 const outputFile = "./swagger_output.json";
 const endpointsFile = ["../routes/api.ts"];
 
-swaggerAutogen({ openapi: "3.0.0" })(outputFile, endpointsFile, doc)
+swaggerAutogen({ openapi: "3.0.0" })(outputFile, endpointsFile, doc);
